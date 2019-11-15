@@ -1,41 +1,35 @@
 package br.com.azi.challenge.controller;
 
-import br.com.azi.challenge.model.Proposta;
-import br.com.azi.challenge.repository.PropostaRepository;
+import br.com.azi.challenge.model.Licitacao;
+import br.com.azi.challenge.repository.LicitacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/proposta")
-public class PropostaController {
+@RequestMapping("/licitacao")
+public class LicitacaoController {
 
     @Autowired
-    PropostaRepository propostaRepository;
+    LicitacaoRepository licitacaoRepository;
 
     @GetMapping()
-    public List listarTodas() {
-        return propostaRepository.findAll();
+    public List test() {
+        return licitacaoRepository.findAll();
     }
 
     @PostMapping()
-    public Proposta salvar(@RequestBody Proposta proposta) {
-        return propostaRepository.save(proposta);
+    public Licitacao save(@RequestBody Licitacao licitacao) {
+        return licitacaoRepository.save(licitacao);
     }
 
     @PutMapping()
-    public Proposta atualizar(@RequestBody Proposta proposta) {
-        return propostaRepository.save(proposta);
+    public Licitacao update(@RequestBody Licitacao licitacao) {
+        return licitacaoRepository.save(licitacao);
     }
 
-    @DeleteMapping("/{id}")
-    public void excluir(@PathVariable() String id) {
-        propostaRepository.deleteById(id);
-    }
 
-    public Proposta classificar()
 
 
 }
