@@ -13,10 +13,18 @@ const mutations = {
   alteraLicitacao(state, licitacao) {
     state.licitacao = licitacao;
   },
+  incluir(state, licitacao) {
+    state.licitacoes.push(licitacao);
+  },
 };
 
 const actions = {
   async salvar({ commit }, licitacao) {
+    const { data } = await salvarService(licitacao);
+    commit('alteraLicitacao', data);
+    commit('incluir', data);
+  },
+  async atualizar({ commit }, licitacao) {
     const { data } = await salvarService(licitacao);
     commit('alteraLicitacao', data);
   },

@@ -8,7 +8,7 @@
         <v-row>
           <v-col cols="12">
             <v-text-field
-              v-model="value.descricao"
+              v-model="licitacao.descricao"
               label="Descrição"
             />
           </v-col>
@@ -16,7 +16,7 @@
             <v-select
               label="Tipo de Classificação"
               :items="tipos"
-              v-model="value.tipoClassificacao"
+              v-model="licitacao.tipoClassificacao"
             />
           </v-col>
         </v-row>
@@ -30,22 +30,24 @@
 
 <script>
 export default {
-  props: {
-    value: {
-      type: Object,
-      default: () => {},
-    },
-  },
   data: () => ({
     tipos: [
       { text: 'Menor Preço', value: 'MENOR_PRECO' },
       { text: 'Nota Preço', value: 'NOTA_PRECO' },
     ],
+    licitacao: {},
   }),
+  mounted() {
+    this.licitacao = Object.assign({}, this.$store.state.licitacao.licitacao);
+  },
   methods: {
     async salvar() {
-      const licitacaoSalva = await this.$store.dispatch('licitacao/salvar', this.value);
-      this.$emit('input', licitacaoSalva);
+      if (this.licitacao.id) {
+        await this.$store.dispatch('licitacao/atualizar', this.licitacao);
+      } else {
+        await this.$store.dispatch('licitacao/salvar', this.licitacao);
+      }
+      this.$emit('saved');
     },
   },
 };

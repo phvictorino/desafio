@@ -1,8 +1,21 @@
 <template>
   <div>
     <v-card>
-      <v-card-title> </v-card-title>
+      <v-card-title>
+        <h3 class="title">Listagem de licitações</h3>
+      </v-card-title>
       <v-card-text>
+        <v-data-table
+          :items="listaLicitacaoes"
+          :headers="headers"
+        >
+          <template v-slot:item.tipoClassificacao="{item}">
+            {{item.tipoClassificacao | transformarTipoClassificacao}}
+          </template>
+          <template v-slot:item.acoes="{item}">
+            <botao-acao-tabela icone="mdi-pencil" @click="editar(item)" texto="Editar" />
+          </template>
+        </v-data-table>
         <v-row
           class="mt-3"
           justify="center"
@@ -13,27 +26,13 @@
             color="indigo"
           >Nova Licitação</v-btn>
         </v-row>
-        <v-data-table
-          :items="listaLicitacaoes"
-          :headers="headers"
-        >
-          <template v-slot:item.tipoClassificacao="{item}">
-            {{item.tipoClassificacao | transformarTipoClassificacao}}
-          </template>
-          <template v-slot:item.acoes="{item}">
-            <botao-acao-tabela icone="mdi-pencil"/>
-          </template>
-        </v-data-table>
       </v-card-text>
     </v-card>
     <v-dialog
       v-model="dialogFormulario"
       max-width="800"
     >
-      <formulario
-        v-model="licitacaoSelecionada"
-        @saved="saved"
-      ></formulario>
+      <formulario @saved="saved"></formulario>
     </v-dialog>
   </div>
 </template>
@@ -78,6 +77,10 @@ export default {
     },
     saved() {
       this.dialogFormulario = false;
+    },
+    editar(licitacao) {
+      this.$store.commit('licitacao/alteraLicitacao', licitacao);
+      this.dialogFormulario = true;
     },
   },
 };
