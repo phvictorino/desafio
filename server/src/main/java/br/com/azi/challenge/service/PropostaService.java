@@ -1,5 +1,6 @@
 package br.com.azi.challenge.service;
 
+import br.com.azi.challenge.model.Licitacao;
 import br.com.azi.challenge.model.Proposta;
 import br.com.azi.challenge.model.enums.TipoClassificacaoEnum;
 import org.springframework.stereotype.Service;
@@ -28,9 +29,13 @@ public class PropostaService {
     }
 
     public Proposta atualizar(Proposta proposta) {
-        int index = propostas.indexOf(proposta);
-        propostas.set(index, proposta);
-        return proposta;
+        Proposta resultado = propostas.stream().filter(propostaFilter ->  propostaFilter.getId().equals(proposta.getId())).findAny().orElse(null);
+        if (resultado != null) {
+            int index = propostas.indexOf(resultado);
+            propostas.set(index, proposta);
+            return proposta;
+        }
+        return null;
     }
 
     public List<Proposta> classificar(TipoClassificacaoEnum tipoClassificacao) {

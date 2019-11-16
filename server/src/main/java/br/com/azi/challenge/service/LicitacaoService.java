@@ -25,9 +25,13 @@ public class LicitacaoService {
     }
 
     public Licitacao atualizar(Licitacao licitacao) {
-        int index = licitacoes.indexOf(licitacao);
-        licitacoes.set(index, licitacao);
-        return licitacao;
+        Licitacao resultado = licitacoes.stream().filter(licitacaoFilter ->  licitacaoFilter.getId().equals(licitacao.getId())).findAny().orElse(null);
+        if (resultado != null) {
+            int index = licitacoes.indexOf(resultado);
+            licitacoes.set(index, licitacao);
+            return licitacao;
+        }
+        return null;
     }
 
 }
