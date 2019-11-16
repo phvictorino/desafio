@@ -6,10 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Licitacao {
-
-    @Id
+    
     public String id;
-
     public String descricao;
     public TipoClassificacaoEnum tipoClassificacao;
 
