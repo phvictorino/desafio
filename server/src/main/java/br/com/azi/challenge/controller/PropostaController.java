@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -35,7 +37,12 @@ public class PropostaController {
         propostaRepository.deleteById(id);
     }
 
-    //public Proposta classificar()
+    @PostMapping("/classificar")
+    public List<Proposta> classificar(@RequestBody List<Proposta> propostas) {
+        Collections.sort(propostas, Comparator.comparing(Proposta::getPreco));
+
+        return propostas;
+    }
 
 
 }
