@@ -3,12 +3,11 @@ package br.com.azi.challenge.model;
 import org.springframework.data.annotation.Id;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Proposta {
 
-    @Id
-    public String id;
-
+    public Integer id;
     public String fornecedor;
     public Double nota;
     public Double preco;
@@ -16,11 +15,11 @@ public class Proposta {
     public Integer classificacao;
     public Licitacao licitacao;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -70,5 +69,18 @@ public class Proposta {
 
     public void setLicitacao(Licitacao licitacao) {
         this.licitacao = licitacao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Proposta proposta = (Proposta) o;
+        return Objects.equals(getId(), proposta.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }
