@@ -2,13 +2,15 @@ package br.com.azi.challenge.model;
 
 import br.com.azi.challenge.model.enums.TipoClassificacaoEnum;
 
+import java.util.Objects;
+
 public class Licitacao {
 
-    public String id;
+    public Integer id;
     public String descricao;
     public TipoClassificacaoEnum tipoClassificacao;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -26,5 +28,18 @@ public class Licitacao {
 
     public void setTipoClassificacao(TipoClassificacaoEnum tipoClassificacao) {
         this.tipoClassificacao = tipoClassificacao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Licitacao licitacao = (Licitacao) o;
+        return getId().equals(licitacao.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

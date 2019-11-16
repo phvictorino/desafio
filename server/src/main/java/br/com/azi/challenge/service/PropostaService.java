@@ -2,14 +2,14 @@ package br.com.azi.challenge.service;
 
 import br.com.azi.challenge.model.Proposta;
 import br.com.azi.challenge.model.enums.TipoClassificacaoEnum;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-@Component()
+@Service
 public class PropostaService {
 
     private List<Proposta> propostas = new ArrayList<>();
