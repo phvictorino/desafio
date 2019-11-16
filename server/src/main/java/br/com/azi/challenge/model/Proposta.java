@@ -10,7 +10,7 @@ public class Proposta {
     public Double preco;
     public String dataCadastro;
     public Integer classificacao;
-    public Licitacao licitacao;
+    public Integer licitacao;
 
     public Integer getId() {
         return id;
@@ -60,11 +60,11 @@ public class Proposta {
         this.classificacao = classificacao;
     }
 
-    public Licitacao getLicitacao() {
+    public Integer getLicitacao() {
         return licitacao;
     }
 
-    public void setLicitacao(Licitacao licitacao) {
+    public void setLicitacao(Integer licitacao) {
         this.licitacao = licitacao;
     }
 

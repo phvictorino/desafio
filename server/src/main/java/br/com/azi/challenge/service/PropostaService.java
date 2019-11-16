@@ -5,10 +5,8 @@ import br.com.azi.challenge.model.Proposta;
 import br.com.azi.challenge.model.enums.TipoClassificacaoEnum;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class PropostaService {
@@ -46,6 +44,14 @@ public class PropostaService {
             Collections.sort(propostas, Comparator.comparingDouble(Proposta::getPreco).thenComparing(Proposta::getDataCadastro));
         }
 
+        for (int index = 0; index < propostas.size(); index++) {
+            propostas.get(index).setClassificacao(index + 1);
+        }
+
         return propostas;
+    }
+
+    public List<Proposta> buscarPropostasPorLicitacao (Integer idLicitacao) {
+        return propostas.stream().filter(p -> p.getLicitacao().equals(idLicitacao)).collect(Collectors.toList());
     }
 }
