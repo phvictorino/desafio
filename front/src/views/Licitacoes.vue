@@ -3,14 +3,37 @@
     <v-card>
       <v-card-title> </v-card-title>
       <v-card-text>
-        <v-row class="mt-3" justify="center">
-          <v-btn @click="novaLicitacao" dark color="indigo">Nova Licitação</v-btn>
+        <v-row
+          class="mt-3"
+          justify="center"
+        >
+          <v-btn
+            @click="novaLicitacao"
+            dark
+            color="indigo"
+          >Nova Licitação</v-btn>
         </v-row>
-        <v-data-table :items="listaLicitacaoes" :headers="headers"> </v-data-table>
+        <v-data-table
+          :items="listaLicitacaoes"
+          :headers="headers"
+        >
+          <template v-slot:item.tipoClassificacao="{item}">
+            {{item.tipoClassificacao | transformarTipoClassificacao}}
+          </template>
+          <template v-slot:item.acoes="{item}">
+            <botao-acao-tabela icone="mdi-pencil"/>
+          </template>
+        </v-data-table>
       </v-card-text>
     </v-card>
-    <v-dialog v-model="dialogFormulario" max-width="800">
-      <formulario v-model="licitacaoSelecionada" @saved="saved"></formulario>
+    <v-dialog
+      v-model="dialogFormulario"
+      max-width="800"
+    >
+      <formulario
+        v-model="licitacaoSelecionada"
+        @saved="saved"
+      ></formulario>
     </v-dialog>
   </div>
 </template>
@@ -27,6 +50,14 @@ export default {
       {
         text: 'Descrição',
         value: 'descricao',
+      },
+      {
+        text: 'Tipo de classificação',
+        value: 'tipoClassificacao',
+      },
+      {
+        text: 'Ações',
+        value: 'acoes',
       },
     ],
     dialogFormulario: false,
