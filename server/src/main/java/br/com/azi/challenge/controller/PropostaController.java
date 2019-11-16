@@ -1,9 +1,10 @@
 package br.com.azi.challenge.controller;
 
+import br.com.azi.challenge.dto.ClassificacaoDTO;
 import br.com.azi.challenge.model.Proposta;
+import br.com.azi.challenge.model.enums.TipoClassificacaoEnum;
 import br.com.azi.challenge.repository.PropostaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -11,7 +12,8 @@ import java.util.Comparator;
 import java.util.List;
 
 @RestController
-@RequestMapping("/proposta")
+@RequestMapping("/propostas")
+@CrossOrigin(origins = "http://localhost:8080")
 public class PropostaController {
 
     @Autowired
@@ -38,10 +40,15 @@ public class PropostaController {
     }
 
     @PostMapping("/classificar")
-    public List<Proposta> classificar(@RequestBody List<Proposta> propostas) {
-        Collections.sort(propostas, Comparator.comparing(Proposta::getPreco));
+    public List<Proposta> classificar(@RequestBody ClassificacaoDTO dto) {
 
-        return propostas;
+        if (dto.tipoClassificacao.equals(TipoClassificacaoEnum.NOTA_PRECO)) {
+            Collections.sort(dto.propostas, Comparator.comparingDouble(Proposta::getNota).thenComparing(Proposta::getPreco).thenComparing(Proposta::getDataCadastro).reversed());
+        } else {
+            Collections.sort(dto.propostas, Comparator.comparingDouble(Proposta::getPreco).thenComparing(Proposta::getDataCadastro));
+        }
+
+        return dto.propostas;
     }
 
 

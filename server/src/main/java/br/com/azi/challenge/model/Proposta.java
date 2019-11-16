@@ -10,8 +10,8 @@ public class Proposta {
     public String id;
 
     public String fornecedor;
-    public BigDecimal nota;
-    public BigDecimal preco;
+    public Double nota;
+    public Double preco;
     public String dataCadastro;
     public Integer classificacao;
     public Licitacao licitacao;
@@ -32,19 +32,19 @@ public class Proposta {
         this.fornecedor = fornecedor;
     }
 
-    public BigDecimal getNota() {
+    public Double getNota() {
         return nota;
     }
 
-    public void setNota(BigDecimal nota) {
+    public void setNota(Double nota) {
         this.nota = nota;
     }
 
-    public BigDecimal getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(BigDecimal preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 
