@@ -1,8 +1,5 @@
 package br.com.azi.challenge.model;
 
-import org.springframework.data.annotation.Id;
-
-import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Proposta {

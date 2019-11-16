@@ -1,12 +1,9 @@
 package br.com.azi.challenge.model;
 
 import br.com.azi.challenge.model.enums.TipoClassificacaoEnum;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
 public class Licitacao {
-    
+
     public String id;
     public String descricao;
     public TipoClassificacaoEnum tipoClassificacao;
