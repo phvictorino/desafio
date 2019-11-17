@@ -27,6 +27,10 @@ const mutations = {
   adicionarPropostaParaLicitacao(state, proposta) {
     state.licitacao.propostas.push(proposta);
   },
+  removerLicitacao(state, licitacao) {
+    const index = state.licitacoes.indexOf(licitacao);
+    state.licitacoes.splice(index, 1);
+  },
 };
 
 const actions = {
@@ -46,6 +50,10 @@ const actions = {
   async carregarPropostas({ commit, state }) {
     const { data } = await service.carregarPropostas(state.licitacao.id);
     commit('alteraLicitacao', data);
+  },
+  async excluir({ commit }, licitacao) {
+    await service.excluir(licitacao.id);
+    commit('removerLicitacao', licitacao);
   },
 };
 

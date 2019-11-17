@@ -9,6 +9,9 @@ const mutations = {
   alterarCampo(state, { campo, valor }) {
     state.proposta = Object.assign(state.proposta, { [campo]: valor });
   },
+  nova(state) {
+    state.proposta = {};
+  },
 };
 
 const actions = {

@@ -83,6 +83,7 @@ export default {
   },
   methods: {
     novaProposta() {
+      this.$store.commit('proposta/nova');
       this.dialogFormulario = true;
     },
     async reclassificarPropostas() {

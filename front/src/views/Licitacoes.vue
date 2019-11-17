@@ -23,6 +23,12 @@
               @click="verPropostas(item)"
               texto="Propostas"
             />
+            <botao-acao-tabela
+              icone="mdi-delete"
+              cor="error"
+              @click="excluir(item)"
+              texto="Excluir"
+            />
           </template>
         </v-data-table>
         <v-row
@@ -105,6 +111,9 @@ export default {
     },
     novaProposta() {
       this.dialogFormularioProposta = true;
+    },
+    excluir(licitacao) {
+      this.$store.dispatch('licitacao/excluir', licitacao);
     },
   },
 };
