@@ -33,9 +33,9 @@ public class LicitacaoController {
         return licitacaoService.atualizar(licitacao);
     }
 
-    @DeleteMapping()
-    public void excluir(@RequestBody Licitacao licitacao) {
-        licitacaoService.excluir(licitacao);
+    @DeleteMapping("/{id}")
+    public void excluir(@PathVariable Integer id) {
+        licitacaoService.excluir(id);
     }
 
 

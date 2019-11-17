@@ -6,6 +6,7 @@ import br.com.azi.challenge.model.enums.TipoClassificacaoEnum;
 import br.com.azi.challenge.utils.GeradorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -36,8 +37,11 @@ public class LicitacaoService {
         return licitacao;
     }
 
-    public void excluir(Licitacao licitacao) {
-        licitacoes.remove(licitacao);
+    public void excluir(Integer idLicitacao) {
+        Licitacao resultado = licitacoes.stream().filter(licitacaoFilter ->  licitacaoFilter.getId().intValue() == idLicitacao.intValue()).findAny().orElse(null);
+        if (resultado != null) {
+            licitacoes.remove(resultado);
+        }
     }
 
     public Licitacao atualizar(Licitacao licitacao) {
