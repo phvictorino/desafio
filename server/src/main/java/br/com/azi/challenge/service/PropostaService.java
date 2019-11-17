@@ -3,6 +3,7 @@ package br.com.azi.challenge.service;
 import br.com.azi.challenge.model.Licitacao;
 import br.com.azi.challenge.model.Proposta;
 import br.com.azi.challenge.model.enums.TipoClassificacaoEnum;
+import br.com.azi.challenge.utils.GeradorUtils;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -14,7 +15,7 @@ public class PropostaService {
 
     public PropostaService() {
         Proposta proposta1 = new Proposta();
-        proposta1.setId(1);
+        proposta1.setId(GeradorUtils.getIdProposta());
         proposta1.setFornecedor("BIC");
         proposta1.setLicitacao(1);
         proposta1.setNota(new BigDecimal(8.0));
@@ -23,7 +24,7 @@ public class PropostaService {
         propostas.add(proposta1);
 
         Proposta proposta2 = new Proposta();
-        proposta2.setId(2);
+        proposta2.setId(GeradorUtils.getIdProposta());
         proposta2.setFornecedor("Cristal");
         proposta2.setLicitacao(1);
         proposta2.setNota(new BigDecimal(9.0));
@@ -39,6 +40,7 @@ public class PropostaService {
     }
 
     public Proposta incluir(Proposta proposta) {
+        proposta.setId(GeradorUtils.getIdProposta());
         propostas.add(proposta);
         return proposta;
     }

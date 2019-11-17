@@ -3,6 +3,7 @@ package br.com.azi.challenge.service;
 import br.com.azi.challenge.model.Licitacao;
 import br.com.azi.challenge.model.Proposta;
 import br.com.azi.challenge.model.enums.TipoClassificacaoEnum;
+import br.com.azi.challenge.utils.GeradorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class LicitacaoService {
     PropostaService propostaService;
 
     LicitacaoService() {
-        Licitacao licitacao = new Licitacao(1, "Compra de canetas", TipoClassificacaoEnum.NOTA_PRECO);
+        Licitacao licitacao = new Licitacao(GeradorUtils.getIdLicitacao(), "Compra de canetas", TipoClassificacaoEnum.NOTA_PRECO);
         licitacoes.add(licitacao);
     }
 
@@ -30,6 +31,7 @@ public class LicitacaoService {
     }
 
     public Licitacao incluir(Licitacao licitacao) {
+        licitacao.setId(GeradorUtils.getIdLicitacao());
         licitacoes.add(licitacao);
         return licitacao;
     }
