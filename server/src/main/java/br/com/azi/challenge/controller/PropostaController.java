@@ -36,10 +36,5 @@ public class PropostaController {
         propostaService.excluir(proposta);
     }
 
-    @GetMapping("/classificar")
-    public List<Proposta> classificar(@RequestParam TipoClassificacaoEnum tipoClassificacao) {
-        return propostaService.classificar(tipoClassificacao);
-    }
-
 
 }

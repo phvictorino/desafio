@@ -19,24 +19,7 @@ public class LicitacaoService {
     PropostaService propostaService;
 
     LicitacaoService() {
-        List<Proposta> propostas = new ArrayList<>();
-
         Licitacao licitacao = new Licitacao(1, "Compra de canetas", TipoClassificacaoEnum.NOTA_PRECO);
-
-        Proposta proposta = new Proposta();
-        proposta.setId(1);
-        proposta.setFornecedor("BIC");
-        proposta.setLicitacao(licitacao.getId());
-        proposta.setNota(new BigDecimal(8.0));
-        proposta.setPreco(new BigDecimal(1000.0));
-
-        proposta.setId(2);
-        proposta.setFornecedor("Cristal");
-        proposta.setLicitacao(licitacao.getId());
-        proposta.setNota(new BigDecimal(9.0));
-        proposta.setPreco(new BigDecimal(1100.0));
-
-        propostas.add(proposta);
         licitacoes.add(licitacao);
     }
 
@@ -66,7 +49,7 @@ public class LicitacaoService {
     }
 
     public Licitacao preencherPropostas(Integer id) {
-        Licitacao resultado = licitacoes.stream().filter(licitacaoFilter ->  licitacaoFilter.getId().intValue() == id).findAny().orElse(null);
+        Licitacao resultado = licitacoes.stream().filter(licitacaoFilter ->  licitacaoFilter.getId().intValue() == id.intValue()).findFirst().orElse(null);
         if (resultado != null) {
             List<Proposta> propostas = propostaService.buscarPropostasPorLicitacao(resultado.getId());
             List<Proposta> propostasClassificadas = classificarPropostas(propostas, resultado.getTipoClassificacao());
