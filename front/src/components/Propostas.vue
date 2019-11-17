@@ -1,16 +1,60 @@
 <template>
-  <v-card>
-    <v-data-table :items="licitacao.propostas" :headers="headers">
-
-    </v-data-table>
-  </v-card>
+  <div>
+    <v-card>
+      <v-card-title>
+        <h3 class="title">
+          Propostas da Licitação: {{licitacao.descricao}}
+        </h3>
+      </v-card-title>
+      <v-card-text>
+        <p class="subtitle">
+          Tipo de classificação: {{licitacao.tipoClassificacao | transformarTipoClassificacao}}
+        </p>
+        <v-data-table
+          :items="licitacao.propostas"
+          :headers="headers"
+        >
+          <template v-slot:item.dataCadastro="{item}">
+            {{item.dataCadastro | transformarData}}
+          </template>
+          <template v-slot:item.preco="{item}">
+            {{item.preco | transformarMoeda}}
+          </template>
+        </v-data-table>
+      </v-card-text>
+      <v-card-actions class="justify-center">
+        <v-btn
+          dark
+          color="indigo"
+          @click="novaProposta"
+        >Nova proposta</v-btn>
+        <v-btn
+          dark
+          color="indigo"
+          @click="reclassificarPropostas"
+        >Reclassificar propostas</v-btn>
+        <v-btn
+          dark
+          color="error"
+          @click="$emit('close')"
+        >Fechar</v-btn>
+      </v-card-actions>
+    </v-card>
+    <v-dialog v-model="dialogFormulario" max-width="800">
+      <formulario-proposta @close="dialogFormulario = false"></formulario-proposta>
+    </v-dialog>
+  </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 
 export default {
+  components: {
+    'formulario-proposta': () => import('@/components/FormularioProposta.vue'),
+  },
   data: () => ({
+    dialogFormulario: false,
     headers: [
       {
         text: 'Fornecedor',
@@ -37,9 +81,16 @@ export default {
   computed: {
     ...mapState('licitacao', ['licitacao']),
   },
+  methods: {
+    novaProposta() {
+      this.dialogFormulario = true;
+    },
+    async reclassificarPropostas() {
+      await this.$store.dispatch('licitacao/carregarPropostas');
+    },
+  },
 };
 </script>
 
 <style>
-
 </style>

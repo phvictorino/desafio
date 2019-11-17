@@ -34,6 +34,7 @@
             dark
             color="indigo"
           >Nova Licitação</v-btn>
+
         </v-row>
       </v-card-text>
     </v-card>
@@ -41,10 +42,13 @@
       v-model="dialogFormulario"
       max-width="800"
     >
-      <formulario @saved="saved"></formulario>
+      <formulario @saved="dialogFormulario = false"></formulario>
     </v-dialog>
-    <v-dialog v-model="dialogPropostas" max-width="800">
-      <propostas />
+    <v-dialog
+      v-model="dialogPropostas"
+      max-width="800"
+    >
+      <propostas @close="dialogPropostas = false" />
     </v-dialog>
   </div>
 </template>
@@ -87,18 +91,20 @@ export default {
       this.$store.dispatch('licitacao/buscarTodos');
     },
     novaLicitacao() {
+      this.$store.commit('licitacao/nova');
       this.dialogFormulario = true;
-    },
-    saved() {
-      this.dialogFormulario = false;
     },
     editar(licitacao) {
       this.$store.commit('licitacao/alteraLicitacao', licitacao);
       this.dialogFormulario = true;
     },
     async verPropostas(licitacao) {
-      await this.$store.dispatch('licitacao/carregarPropostas', licitacao);
+      this.$store.commit('licitacao/alteraLicitacao', licitacao);
+      await this.$store.dispatch('licitacao/carregarPropostas');
       this.dialogPropostas = true;
+    },
+    novaProposta() {
+      this.dialogFormularioProposta = true;
     },
   },
 };

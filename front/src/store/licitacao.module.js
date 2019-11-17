@@ -9,6 +9,9 @@ const state = {
 };
 
 const mutations = {
+  nova(state) {
+    state.licitacao = {};
+  },
   alterarLicitacoes(state, licitacoes) {
     state.licitacoes = licitacoes;
   },
@@ -19,8 +22,10 @@ const mutations = {
     state.licitacoes.push(licitacao);
   },
   alterarCampo(state, { campo, valor }) {
-    console.log(campo, valor);
     state.licitacao = Object.assign(state.licitacao, { [campo]: valor });
+  },
+  adicionarPropostaParaLicitacao(state, proposta) {
+    state.licitacao.propostas.push(proposta);
   },
 };
 
@@ -38,8 +43,8 @@ const actions = {
     const { data } = await service.buscarTodos();
     commit('alterarLicitacoes', data);
   },
-  async carregarPropostas({ commit }, licitacao) {
-    const { data } = await service.carregarPropostas(licitacao.id);
+  async carregarPropostas({ commit, state }) {
+    const { data } = await service.carregarPropostas(state.licitacao.id);
     commit('alteraLicitacao', data);
   },
 };
@@ -47,6 +52,9 @@ const actions = {
 const getters = {
   listaLicitacaoes(state) {
     return state.licitacoes;
+  },
+  licitacaoSelecionada(state) {
+    return state.licitacao;
   },
 };
 
