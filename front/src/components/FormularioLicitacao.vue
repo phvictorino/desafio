@@ -8,7 +8,7 @@
         <v-row>
           <v-col cols="12">
             <v-text-field
-              v-model="licitacao.descricao"
+              v-model="descricao"
               label="Descrição"
             />
           </v-col>
@@ -16,7 +16,7 @@
             <v-select
               label="Tipo de Classificação"
               :items="tipos"
-              v-model="licitacao.tipoClassificacao"
+              v-model="tipoClassificacao"
             />
           </v-col>
         </v-row>
@@ -35,18 +35,28 @@ export default {
       { text: 'Menor Preço', value: 'MENOR_PRECO' },
       { text: 'Nota Preço', value: 'NOTA_PRECO' },
     ],
-    licitacao: {},
   }),
-  mounted() {
-    this.licitacao = Object.assign({}, this.$store.state.licitacao.licitacao);
+  computed: {
+    descricao: {
+      get() {
+        return this.$store.state.licitacao.licitacao.descricao;
+      },
+      set(value) {
+        this.$store.commit('licitacao/alterarCampo', { campo: 'descricao', valor: value });
+      },
+    },
+    tipoClassificacao: {
+      get() {
+        return this.$store.state.licitacao.licitacao.tipoClassificacao;
+      },
+      set(value) {
+        this.$store.commit('licitacao/alterarCampo', { campo: 'tipoClassificacao', valor: value });
+      },
+    },
   },
   methods: {
     async salvar() {
-      if (this.licitacao.id) {
-        await this.$store.dispatch('licitacao/atualizar', this.licitacao);
-      } else {
-        await this.$store.dispatch('licitacao/salvar', this.licitacao);
-      }
+      await this.$store.dispatch('licitacao/salvar');
       this.$emit('saved');
     },
   },

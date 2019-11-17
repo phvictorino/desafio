@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow */
-import { salvar as salvarService, buscarTodos as buscarTodosService } from '@/services/licitacoes.service';
+import * as service from '@/services/licitacoes.service';
 
 const state = {
   licitacao: {},
@@ -16,20 +16,24 @@ const mutations = {
   incluir(state, licitacao) {
     state.licitacoes.push(licitacao);
   },
+  alterarCampo(state, { campo, valor }) {
+    console.log(campo, valor);
+    state.licitacao = Object.assign(state.licitacao, { [campo]: valor });
+  },
 };
 
 const actions = {
-  async salvar({ commit }, licitacao) {
-    const { data } = await salvarService(licitacao);
-    commit('alteraLicitacao', data);
-    commit('incluir', data);
-  },
-  async atualizar({ commit }, licitacao) {
-    const { data } = await salvarService(licitacao);
-    commit('alteraLicitacao', data);
+  async salvar({ commit, state }) {
+    if (!state.licitacao.id) {
+      const { data } = await service.salvar(state.licitacao);
+      commit('incluir', data);
+    } else {
+      const { data } = await service.atualizar(state.licitacao);
+      commit('alteraLicitacao', data);
+    }
   },
   async buscarTodos({ commit }) {
-    const { data } = await buscarTodosService();
+    const { data } = await service.buscarTodos();
     commit('alterarLicitacoes', data);
   },
 };

@@ -13,7 +13,16 @@
             {{item.tipoClassificacao | transformarTipoClassificacao}}
           </template>
           <template v-slot:item.acoes="{item}">
-            <botao-acao-tabela icone="mdi-pencil" @click="editar(item)" texto="Editar" />
+            <botao-acao-tabela
+              icone="mdi-pencil"
+              @click="editar(item)"
+              texto="Editar"
+            />
+            <botao-acao-tabela
+              icone="mdi-clipboard-list"
+              @click="verPropostas(item)"
+              texto="Propostas"
+            />
           </template>
         </v-data-table>
         <v-row
