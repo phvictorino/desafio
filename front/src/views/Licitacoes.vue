@@ -43,6 +43,9 @@
     >
       <formulario @saved="saved"></formulario>
     </v-dialog>
+    <v-dialog v-model="dialogPropostas" max-width="800">
+      <propostas />
+    </v-dialog>
   </div>
 </template>
 
@@ -52,6 +55,7 @@ import { mapGetters } from 'vuex';
 export default {
   components: {
     formulario: () => import('@/components/FormularioLicitacao.vue'),
+    propostas: () => import('@/components/Propostas.vue'),
   },
   data: () => ({
     headers: [
@@ -69,6 +73,7 @@ export default {
       },
     ],
     dialogFormulario: false,
+    dialogPropostas: false,
     licitacaoSelecionada: {},
   }),
   computed: {
@@ -90,6 +95,10 @@ export default {
     editar(licitacao) {
       this.$store.commit('licitacao/alteraLicitacao', licitacao);
       this.dialogFormulario = true;
+    },
+    async verPropostas(licitacao) {
+      await this.$store.dispatch('licitacao/carregarPropostas', licitacao);
+      this.dialogPropostas = true;
     },
   },
 };

@@ -2,7 +2,9 @@
 import * as service from '@/services/licitacoes.service';
 
 const state = {
-  licitacao: {},
+  licitacao: {
+    propostas: [],
+  },
   licitacoes: [],
 };
 
@@ -35,6 +37,10 @@ const actions = {
   async buscarTodos({ commit }) {
     const { data } = await service.buscarTodos();
     commit('alterarLicitacoes', data);
+  },
+  async carregarPropostas({ commit }, licitacao) {
+    const { data } = await service.carregarPropostas(licitacao.id);
+    commit('alteraLicitacao', data);
   },
 };
 
