@@ -36,21 +36,6 @@ public class PropostaService {
         return null;
     }
 
-    public List<Proposta> classificar(TipoClassificacaoEnum tipoClassificacao) {
-
-        if (tipoClassificacao.equals(TipoClassificacaoEnum.NOTA_PRECO)) {
-            Collections.sort(propostas, Comparator.comparingDouble(Proposta::getNota).thenComparing(Proposta::getPreco).thenComparing(Proposta::getDataCadastro).reversed());
-        } else {
-            Collections.sort(propostas, Comparator.comparingDouble(Proposta::getPreco).thenComparing(Proposta::getDataCadastro));
-        }
-
-        for (int index = 0; index < propostas.size(); index++) {
-            propostas.get(index).setClassificacao(index + 1);
-        }
-
-        return propostas;
-    }
-
     public List<Proposta> buscarPropostasPorLicitacao (Integer idLicitacao) {
         return propostas.stream().filter(p -> p.getLicitacao().equals(idLicitacao)).collect(Collectors.toList());
     }

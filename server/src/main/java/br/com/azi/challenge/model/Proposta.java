@@ -1,13 +1,14 @@
 package br.com.azi.challenge.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Proposta {
 
     public Integer id;
     public String fornecedor;
-    public Double nota;
-    public Double preco;
+    public BigDecimal nota;
+    public BigDecimal preco;
     public String dataCadastro;
     public Integer classificacao;
     public Integer licitacao;
@@ -28,19 +29,19 @@ public class Proposta {
         this.fornecedor = fornecedor;
     }
 
-    public Double getNota() {
+    public BigDecimal getNota() {
         return nota;
     }
 
-    public void setNota(Double nota) {
+    public void setNota(BigDecimal nota) {
         this.nota = nota;
     }
 
-    public Double getPreco() {
+    public BigDecimal getPreco() {
         return preco;
     }
 
-    public void setPreco(Double preco) {
+    public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
 

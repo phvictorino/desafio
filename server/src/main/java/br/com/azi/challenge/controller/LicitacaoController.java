@@ -20,6 +20,9 @@ public class LicitacaoController {
         return licitacaoService.listarTodas();
     }
 
+    @GetMapping("/{id}/propostas")
+    public Licitacao listarPropostasLicitacao(@PathVariable Integer id) { return licitacaoService.preencherPropostas(id); }
+
     @PostMapping()
     public Licitacao incluir(@RequestBody Licitacao licitacao) {
         return licitacaoService.incluir(licitacao);
