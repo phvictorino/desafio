@@ -1,6 +1,7 @@
 package br.com.azi.challenge.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Objects;
 
 public class Proposta {
@@ -9,7 +10,7 @@ public class Proposta {
     public String fornecedor;
     public BigDecimal nota;
     public BigDecimal preco;
-    public String dataCadastro;
+    public Date dataCadastro;
     public Integer classificacao;
     public Integer licitacao;
 
@@ -45,11 +46,11 @@ public class Proposta {
         this.preco = preco;
     }
 
-    public String getDataCadastro() {
+    public Date getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(String dataCadastro) {
+    public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
 

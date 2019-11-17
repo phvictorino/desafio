@@ -19,6 +19,7 @@ public class PropostaService {
         proposta1.setLicitacao(1);
         proposta1.setNota(new BigDecimal(8.0));
         proposta1.setPreco(new BigDecimal(1000.0));
+        proposta1.setDataCadastro(new GregorianCalendar(2019, Calendar.NOVEMBER, 11).getTime());
         propostas.add(proposta1);
 
         Proposta proposta2 = new Proposta();
@@ -27,6 +28,7 @@ public class PropostaService {
         proposta2.setLicitacao(1);
         proposta2.setNota(new BigDecimal(9.0));
         proposta2.setPreco(new BigDecimal(1100.0));
+        proposta2.setDataCadastro(new GregorianCalendar(2019, Calendar.NOVEMBER, 12).getTime());
         propostas.add(proposta2);
     }
 
