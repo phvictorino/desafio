@@ -1,24 +1,16 @@
-# front
+# Challenge AZ - Classificação de Propostas
 
-## Project setup
+## Requerimentos para rodar o projeto
+- Node.js (com NPM)
+
+## Instruções para rodar o projeto:
+
+### Instale a dependências
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Para rodar o projeto em modo de desenvolvimento
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
