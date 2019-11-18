@@ -68,7 +68,7 @@ public class LicitacaoService {
     public List<Proposta> classificarPropostas(List<Proposta> propostas, TipoClassificacaoEnum tipoClassificacao) {
 
         if (tipoClassificacao.equals(TipoClassificacaoEnum.NOTA_PRECO)) {
-            Collections.sort(propostas, Comparator.comparing(Proposta::getNota).thenComparing(Proposta::getPreco).thenComparing(Proposta::getDataCadastro).reversed());
+            Collections.sort(propostas, Comparator.comparing(Proposta::getNota).reversed().thenComparing(Proposta::getPreco).thenComparing(Proposta::getDataCadastro));
         } else {
             Collections.sort(propostas, Comparator.comparing(Proposta::getPreco).thenComparing(Proposta::getDataCadastro));
         }
