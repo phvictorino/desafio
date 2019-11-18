@@ -18,6 +18,11 @@
     <v-card-actions class="justify-center">
       <v-btn
         dark
+        color="error"
+        @click="$emit('close');"
+      >Fechar</v-btn>
+      <v-btn
+        dark
         color="indigo"
         @click="salvar"
       >Salvar</v-btn>

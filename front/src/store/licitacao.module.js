@@ -27,6 +27,10 @@ const mutations = {
   adicionarPropostaParaLicitacao(state, proposta) {
     state.licitacao.propostas.push(proposta);
   },
+  atualizarPropostaParaLicitacao(state, { antiga, nova }) {
+    const index = state.licitacao.propostas.indexOf(antiga);
+    state.licitacao.propostas.splice(index, 1, nova);
+  },
   removerLicitacao(state, licitacao) {
     const index = state.licitacoes.indexOf(licitacao);
     state.licitacoes.splice(index, 1);

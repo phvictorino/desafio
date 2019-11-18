@@ -12,13 +12,21 @@ const mutations = {
   nova(state) {
     state.proposta = {};
   },
+  alterarProposta(state, proposta) {
+    state.proposta = proposta;
+  },
 };
 
 const actions = {
   async salvar({ commit, state, rootGetters }) {
-    state.proposta.licitacao = rootGetters['licitacao/licitacaoSelecionada'].id;
-    const { data } = await service.salvar(state.proposta);
-    commit('licitacao/adicionarPropostaParaLicitacao', data, { root: true });
+    if (!state.proposta.id) {
+      state.proposta.licitacao = rootGetters['licitacao/licitacaoSelecionada'].id;
+      const { data } = await service.salvar(state.proposta);
+      commit('licitacao/adicionarPropostaParaLicitacao', data, { root: true });
+    } else {
+      const { data } = await service.atualizar(state.proposta);
+      commit('licitacao/atualizarPropostaParaLicitacao', { antiga: state.proposta, nova: data }, { root: true });
+    }
   },
 };
 

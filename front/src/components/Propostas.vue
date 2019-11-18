@@ -20,6 +20,13 @@
           <template v-slot:item.preco="{item}">
             {{item.preco | transformarMoeda}}
           </template>
+          <template v-slot:item.acoes="{item}">
+            <botao-acao-tabela
+              texto="Editar"
+              icone="mdi-pencil"
+              @click="editar(item)"
+            />
+          </template>
         </v-data-table>
       </v-card-text>
       <v-card-actions class="justify-center">
@@ -40,7 +47,10 @@
         >Fechar</v-btn>
       </v-card-actions>
     </v-card>
-    <v-dialog v-model="dialogFormulario" max-width="800">
+    <v-dialog
+      v-model="dialogFormulario"
+      max-width="800"
+    >
       <formulario-proposta @close="dialogFormulario = false"></formulario-proposta>
     </v-dialog>
   </div>
@@ -76,18 +86,26 @@ export default {
         text: 'Classificação',
         value: 'classificacao',
       },
+      {
+        text: 'Ações',
+        value: 'acoes',
+      },
     ],
   }),
   computed: {
     ...mapState('licitacao', ['licitacao']),
   },
   methods: {
-    novaProposta() {
-      this.$store.commit('proposta/nova');
+    async novaProposta() {
+      await this.$store.commit('proposta/nova');
       this.dialogFormulario = true;
     },
     async reclassificarPropostas() {
       await this.$store.dispatch('licitacao/carregarPropostas');
+    },
+    editar(proposta) {
+      this.$store.commit('proposta/alterarProposta', proposta);
+      this.dialogFormulario = true;
     },
   },
 };
