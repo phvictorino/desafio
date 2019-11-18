@@ -31,13 +31,13 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   computed: {
     fornecedor: {
       get() {
-        return this.proposta.fornecedor;
+        return this.$store.state.proposta.proposta.fornecedor;
       },
       set(value) {
         this.$store.commit('proposta/alterarCampo', { campo: 'fornecedor', valor: value });
@@ -45,7 +45,7 @@ export default {
     },
     nota: {
       get() {
-        return this.proposta.nota;
+        return this.$store.state.proposta.proposta.nota;
       },
       set(value) {
         this.$store.commit('proposta/alterarCampo', { campo: 'nota', valor: value });
@@ -53,7 +53,7 @@ export default {
     },
     preco: {
       get() {
-        return this.proposta.preco;
+        return this.$store.state.proposta.proposta.preco;
       },
       set(value) {
         this.$store.commit('proposta/alterarCampo', { campo: 'preco', valor: value });
@@ -61,14 +61,13 @@ export default {
     },
     dataCadastro: {
       get() {
-        return this.proposta.dataCadastro;
+        return this.$store.state.proposta.proposta.dataCadastro;
       },
       set(value) {
         this.$store.commit('proposta/alterarCampo', { campo: 'dataCadastro', valor: value });
       },
     },
     ...mapGetters('licitacao', ['licitacaoSelecionada']),
-    ...mapState('proposta', ['proposta']),
   },
   methods: {
     async salvar() {

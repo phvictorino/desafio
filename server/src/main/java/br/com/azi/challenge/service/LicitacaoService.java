@@ -56,13 +56,14 @@ public class LicitacaoService {
 
     public Licitacao preencherPropostas(Integer id) {
         Licitacao resultado = licitacoes.stream().filter(licitacaoFilter ->  licitacaoFilter.getId().intValue() == id.intValue()).findFirst().orElse(null);
-        if (resultado != null) {
-            List<Proposta> propostas = propostaService.buscarPropostasPorLicitacao(resultado.getId());
-            List<Proposta> propostasClassificadas = classificarPropostas(propostas, resultado.getTipoClassificacao());
-            resultado.setPropostas(propostasClassificadas);
-            return resultado;
-        }
-        return null;
+        List<Proposta> propostas = propostaService.buscarPropostasPorLicitacao(resultado.getId());
+            if (propostas.size() > 0) {
+                List<Proposta> propostasClassificadas = classificarPropostas(propostas, resultado.getTipoClassificacao());
+                resultado.setPropostas(propostasClassificadas);
+            } else {
+                resultado.setPropostas(new ArrayList<>());
+            }
+        return resultado;
     }
 
     public List<Proposta> classificarPropostas(List<Proposta> propostas, TipoClassificacaoEnum tipoClassificacao) {

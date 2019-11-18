@@ -10,7 +10,7 @@ const mutations = {
     state.proposta = Object.assign(state.proposta, { [campo]: valor });
   },
   nova(state) {
-    state.proposta = {};
+    state.proposta = Object.assign({});
   },
   alterarProposta(state, proposta) {
     state.proposta = proposta;
@@ -27,6 +27,9 @@ const actions = {
       const { data } = await service.atualizar(state.proposta);
       commit('licitacao/atualizarPropostaParaLicitacao', { antiga: state.proposta, nova: data }, { root: true });
     }
+  },
+  async excluir({ commit }, proposta) {
+    await service.excluir(proposta.id);
   },
 };
 

@@ -52,7 +52,7 @@
     </v-dialog>
     <v-dialog
       v-model="dialogPropostas"
-      max-width="800"
+      max-width="1000"
     >
       <propostas @close="dialogPropostas = false" />
     </v-dialog>

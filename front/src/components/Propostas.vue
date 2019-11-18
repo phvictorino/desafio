@@ -26,6 +26,11 @@
               icone="mdi-pencil"
               @click="editar(item)"
             />
+            <botao-acao-tabela
+              texto="Excluir"
+              icone="mdi-delete"
+              @click="excluir(item)"
+            />
           </template>
         </v-data-table>
       </v-card-text>
@@ -96,8 +101,8 @@ export default {
     ...mapState('licitacao', ['licitacao']),
   },
   methods: {
-    async novaProposta() {
-      await this.$store.commit('proposta/nova');
+    novaProposta() {
+      this.$store.commit('proposta/nova');
       this.dialogFormulario = true;
     },
     async reclassificarPropostas() {
@@ -106,6 +111,9 @@ export default {
     editar(proposta) {
       this.$store.commit('proposta/alterarProposta', proposta);
       this.dialogFormulario = true;
+    },
+    async excluir(proposta) {
+      await this.$store.commit('proposta/excluir', proposta);
     },
   },
 };
