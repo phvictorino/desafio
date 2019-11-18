@@ -47,8 +47,11 @@ public class PropostaService {
         return proposta;
     }
 
-    public void excluir(Proposta proposta) {
-        propostas.remove(proposta);
+    public void excluir(Integer idProposta) {
+        Proposta resultado = propostas.stream().filter(propostaFilter ->  propostaFilter.getId().intValue() == idProposta.intValue()).findAny().orElse(null);
+        if (resultado != null) {
+            propostas.remove(resultado);
+        }
     }
 
     public Proposta atualizar(Proposta proposta) {

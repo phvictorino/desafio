@@ -31,9 +31,9 @@ public class PropostaController {
         return propostaService.atualizar(proposta);
     }
 
-    @DeleteMapping()
-    public void excluir(@RequestBody() Proposta proposta) {
-        propostaService.excluir(proposta);
+    @DeleteMapping("/{id}")
+    public void excluir(@PathVariable() Integer id) {
+        propostaService.excluir(id);
     }
 
 
