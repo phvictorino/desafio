@@ -4,8 +4,9 @@ import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
 
-import '@/misc';
 import '@/components';
+import '@/misc/filters';
+import '@/misc/rules';
 
 Vue.config.productionTip = false;
 

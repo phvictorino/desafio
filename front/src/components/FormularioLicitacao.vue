@@ -4,12 +4,13 @@
       <h3 class="title">Formulário de Licitação</h3>
     </v-card-title>
     <v-card-text>
-      <v-form>
+      <v-form ref="form">
         <v-row>
           <v-col cols="12">
             <v-text-field
               v-model="descricao"
               label="Descrição"
+              :rules="[$rules.required]"
             />
           </v-col>
           <v-col cols="12">
@@ -17,6 +18,7 @@
               label="Tipo de Classificação"
               :items="tipos"
               v-model="tipoClassificacao"
+              :rules="[$rules.required]"
             />
           </v-col>
         </v-row>
@@ -24,6 +26,7 @@
     </v-card-text>
     <v-card-actions class="justify-center">
       <v-btn dark color="indigo" @click="salvar">Salvar</v-btn>
+      <v-btn dark color="error" @click="$emit('close')">Fechar</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -56,8 +59,9 @@ export default {
   },
   methods: {
     async salvar() {
+      if (!this.$refs.form.validate()) return;
       await this.$store.dispatch('licitacao/salvar');
-      this.$emit('saved');
+      this.$emit('close');
     },
   },
 };

@@ -5,13 +5,29 @@
     </v-card-title>
     <v-card-text>
       <p>Licitação: {{licitacaoSelecionada.descricao}}</p>
-      <v-form>
-        <v-text-field v-model="fornecedor" label="Fornecedor" />
-        <v-text-field v-model="nota" label="Nota" />
-        <v-text-field v-model="preco" label="Preço" />
+      <v-form ref="form">
+        <v-text-field
+          :rules="[$rules.required]"
+          v-model="fornecedor"
+          label="Fornecedor"
+        />
+        <v-text-field
+          :rules="[$rules.required]"
+          v-model="nota"
+          label="Nota"
+        />
+        <v-text-field
+          :rules="[$rules.required]"
+          v-model="preco"
+          label="Preço"
+        />
         <p class="label">Data de Cadastro</p>
         <v-row justify="center">
-          <v-date-picker v-model="dataCadastro" label="Data Cadastro" />
+          <v-date-picker
+            :rules="[$rules.required]"
+            v-model="dataCadastro"
+            label="Data Cadastro"
+          />
         </v-row>
       </v-form>
     </v-card-text>
@@ -40,7 +56,10 @@ export default {
         return this.$store.state.proposta.proposta.fornecedor;
       },
       set(value) {
-        this.$store.commit('proposta/alterarCampo', { campo: 'fornecedor', valor: value });
+        this.$store.commit('proposta/alterarCampo', {
+          campo: 'fornecedor',
+          valor: value,
+        });
       },
     },
     nota: {
@@ -48,7 +67,10 @@ export default {
         return this.$store.state.proposta.proposta.nota;
       },
       set(value) {
-        this.$store.commit('proposta/alterarCampo', { campo: 'nota', valor: value });
+        this.$store.commit('proposta/alterarCampo', {
+          campo: 'nota',
+          valor: value,
+        });
       },
     },
     preco: {
@@ -56,7 +78,10 @@ export default {
         return this.$store.state.proposta.proposta.preco;
       },
       set(value) {
-        this.$store.commit('proposta/alterarCampo', { campo: 'preco', valor: value });
+        this.$store.commit('proposta/alterarCampo', {
+          campo: 'preco',
+          valor: value,
+        });
       },
     },
     dataCadastro: {
@@ -64,13 +89,17 @@ export default {
         return this.$store.state.proposta.proposta.dataCadastro;
       },
       set(value) {
-        this.$store.commit('proposta/alterarCampo', { campo: 'dataCadastro', valor: value });
+        this.$store.commit('proposta/alterarCampo', {
+          campo: 'dataCadastro',
+          valor: value,
+        });
       },
     },
     ...mapGetters('licitacao', ['licitacaoSelecionada']),
   },
   methods: {
     async salvar() {
+      if (!this.$refs.form.validate()) return;
       await this.$store.dispatch('proposta/salvar');
       this.$emit('close');
     },

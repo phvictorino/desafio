@@ -48,7 +48,7 @@
       v-model="dialogFormulario"
       max-width="800"
     >
-      <formulario @saved="dialogFormulario = false"></formulario>
+      <formulario @close="dialogFormulario = false"></formulario>
     </v-dialog>
     <v-dialog
       v-model="dialogPropostas"
