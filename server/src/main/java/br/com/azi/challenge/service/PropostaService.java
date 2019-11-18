@@ -43,6 +43,9 @@ public class PropostaService {
 
     public Proposta incluir(Proposta proposta) {
         proposta.setId(GeradorUtils.getIdProposta());
+        if (proposta.getDataCadastro() == null) {
+            proposta.setDataCadastro(LocalDate.now());
+        }
         propostas.add(proposta);
         return proposta;
     }
