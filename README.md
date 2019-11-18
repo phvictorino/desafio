@@ -1,5 +1,46 @@
-# desafio
+# Desafio AZ - Classificação de propostas
 Desafio para avaliação de candidato
+
+## Instruções para rodar o projeto (Backend e Frontend)
+
+### Informações sobre o projeto
+- Os dados são mantidos em memória.
+- Ao subir o projeto de frontend, o mesmo estará utilizando Vue CLI (não é necessário instalar a dependência separadamente).
+- Para auxiliar na estilização e componentização do projeto, foi utilizado o framework Vuetify.
+
+### Requerimentos
+- Node.js (versão 10 ou superior)
+- Maven
+
+Obs: O projeto não utiliza banco de dados, não é necessário nada para conexão desse tipo.
+
+## Para rodar o backend
+- Na pasta "server", rode o comando para gerar o package:
+```
+mvn clean install
+```
+
+- Para rodar o projeto com o jar gerado, use o comando:
+```
+java -jar target/challenge-0.0.1-SNAPSHOT.jar
+```
+
+Obs: o backend está configurado para rodar na porta 9000.
+
+## Para rodar o frontend
+
+- Para instalar as dependências do projeto, use o comando: 
+```
+npm install
+```
+
+- Após instalar as dependências, use o comando para rodar em modo de desenvolvimento:
+```
+npm run serve
+```
+
+----------------
+
 
 ### Instruções para o desafio
 - O candidato deverá criar um fork no git e criar uma branch com o nome e sobrenome do canditado(ex: desafio_Jose_Silva) para o desenvolvimento da atividade;
