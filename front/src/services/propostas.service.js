@@ -9,3 +9,5 @@ export const classificar = tipoClassificacao => axios.get(`${url}/classificadas?
 export const salvar = proposta => axios.post(url, proposta);
 
 export const atualizar = proposta => axios.put(url, proposta);
+
+export const excluir = idProposta => axios.delete(`${url}/${idProposta}`);

@@ -56,7 +56,10 @@
       v-model="dialogFormulario"
       max-width="800"
     >
-      <formulario-proposta @close="dialogFormulario = false"></formulario-proposta>
+      <formulario-proposta
+        v-if="dialogFormulario"
+        @close="dialogFormulario = false"
+      ></formulario-proposta>
     </v-dialog>
   </div>
 </template>
@@ -113,7 +116,7 @@ export default {
       this.dialogFormulario = true;
     },
     async excluir(proposta) {
-      await this.$store.commit('proposta/excluir', proposta);
+      await this.$store.dispatch('proposta/excluir', proposta);
     },
   },
 };

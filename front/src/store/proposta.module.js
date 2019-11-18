@@ -30,6 +30,7 @@ const actions = {
   },
   async excluir({ commit }, proposta) {
     await service.excluir(proposta.id);
+    commit('licitacao/excluirProposta', proposta, { root: true });
   },
 };
 

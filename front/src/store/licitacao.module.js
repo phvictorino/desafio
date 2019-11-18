@@ -31,9 +31,13 @@ const mutations = {
     const index = state.licitacao.propostas.indexOf(antiga);
     state.licitacao.propostas.splice(index, 1, nova);
   },
-  removerLicitacao(state, licitacao) {
+  excluirLicitacao(state, licitacao) {
     const index = state.licitacoes.indexOf(licitacao);
     state.licitacoes.splice(index, 1);
+  },
+  excluirProposta(state, proposta) {
+    const index = state.licitacao.propostas.indexOf(proposta);
+    state.licitacao.propostas.splice(index, 1);
   },
 };
 
@@ -57,7 +61,7 @@ const actions = {
   },
   async excluir({ commit }, licitacao) {
     await service.excluir(licitacao.id);
-    commit('removerLicitacao', licitacao);
+    commit('excluirLicitacao', licitacao);
   },
 };
 
